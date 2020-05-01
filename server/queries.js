@@ -11,7 +11,7 @@ connection.connect();
 // gets all reviews
 
 const getAllreviews = (callback) => {
-  connection.query('SELECT * FROM reviews' (err, data) => {
+  connection.query('SELECT * FROM reviews', (err, data) => {
     if (err) {
       callback(err, null)
     } else {
@@ -23,7 +23,7 @@ const getAllreviews = (callback) => {
 // gets reviews from DB where sku matches one sent in get req
 
 const getReviewsForProduct = (sku, callback) => {
-  connection.query('SELECT * FROM reviews WHERE sku = (?)', [sku], (err, data) => {
+  connection.query('SELECT * FROM reviews WHERE product_sku = (?)', [sku], (err, data) => {
     if (err) {
       callback(err, null)
     } else {
