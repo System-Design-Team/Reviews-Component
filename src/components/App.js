@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import ReviewList from './ReviewList.js';
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      reviews: []
+      reviews: [],
+      currentSku: 510121
     };
     this.getAllReviews = this.getAllReviews.bind(this);
   }
@@ -14,6 +16,8 @@ export default class App extends Component {
     this.getAllReviews();
   }
 
+  // TODO: find a way to update current sku on get
+  // function used to update all reviews
   getAllReviews() {
     axios.get('http://127.0.0.1:9004/api/reviews')
     .then(res => {
@@ -31,18 +35,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        {this.state.reviews.map((review) => {
-          if (review.product_sku === 510121) {
-            return (
-              <div>
-              <p>{review.username}</p>
-              <h4><p>{review.review_title}</p></h4>
-            <p>{review.review_body}</p>
-            <p>{review.date}</p>
-            </div>
-            )
-          }
-        })}
+        <ReviewList reviews={this.state.reviews} product={this.state.currentSku}/>
       </div>
     );
   }
