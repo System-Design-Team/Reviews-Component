@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import Rating from './Rating.js';
+import StarRatings from 'react-star-ratings';
 
 export default class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       reviews: []
     };
@@ -31,6 +33,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <Rating sku={510121} reviews={this.state.reviews}/>
         {this.state.reviews.map((review) => {
           if (review.product_sku === 510121) {
             return (
