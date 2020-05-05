@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import Rating from './Rating.js';
+import StarRatings from 'react-star-ratings';
 import ReviewList from './ReviewList.js';
 
 export default class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       reviews: [],
       currentSku: 510121
@@ -35,6 +37,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <Rating sku={510121} reviews={this.state.reviews}/>
         <ReviewList reviews={this.state.reviews} product={this.state.currentSku}/>
       </div>
     );
