@@ -3,7 +3,9 @@ const config = require('./serverConfig.js');
 
 const connection = mysql.createConnection(config);
 
-connection.connect();
+connection.connect(() => {
+  console.log('yo')
+});
 
 // gets all reviews
 

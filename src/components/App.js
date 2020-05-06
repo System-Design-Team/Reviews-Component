@@ -3,7 +3,7 @@ import axios from 'axios';
 import Rating from './Rating.js';
 import StarRatings from 'react-star-ratings';
 import ReviewList from './ReviewList.js';
-import styles from '../styles/main.css';
+// import styles from '../dist/main.css';
 
 export default class App extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export default class App extends Component {
   // TODO: find a way to update current sku on get
   // function used to update all reviews
   getAllReviews() {
-    axios.get('http://127.0.0.1:9004/api/reviews')
+    axios.get('http://localhost:9004/reviews')
     .then(res => {
       const reviews = res.data;
       this.setState({reviews})

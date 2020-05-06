@@ -9,9 +9,11 @@ const bodyParser = require('body-parser');
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, './src/build')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
-app.get('/api/reviews', (req, res) => {
+
+
+app.get('/reviews', (req, res) => {
   queries.getAllreviews((err, data) => {
     if (err) {
       res.status(500).send('could not get data from DB');
