@@ -3,7 +3,7 @@ import axios from 'axios';
 import Rating from './Rating.js';
 import StarRatings from 'react-star-ratings';
 import ReviewList from './ReviewList.js';
-// import styles from '../dist/main.css';
+
 
 export default class App extends Component {
   constructor(props) {
