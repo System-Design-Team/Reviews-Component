@@ -40,7 +40,7 @@ class Rating extends React.Component {
   render() {
     return(
       <div>
-            <StarRatings rating={this.state.averageStars} starRatedColor='yellow' numberOfStars={5} starSpacing='0px'/>
+            <StarRatings starDimension='40px' rating={this.state.averageStars} starRatedColor='yellow' numberOfStars={5} starSpacing='0px'/>
       </div>
     )
   }
