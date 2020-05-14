@@ -31,7 +31,7 @@ export default class App extends Component {
   // TODO: find a way to update current sku on get
   // function used to update all reviews
   getAllReviews() {
-    axios.get('http://localhost:9004/reviews')
+    axios.get('http://worstbuyreviews-env-1.eba-miqf8zef.us-east-2.elasticbeanstalk.com/reviews')
     .then(res => {
       const reviews = res.data;
       this.setState({reviews})
