@@ -12,7 +12,7 @@ const RatingMargin = (props) => {
             <span className='reviewCount'>({props.length} Reviews)</span>
           </div>
           <div className='recommendPercent'>
-            <span>0%</span><span> would recommend to a freind.</span>
+            <span>0%</span><span> would recommend to a friend.</span>
           </div>
           <div className='customerReviews'>See all customer reviews</div>
         </div>
