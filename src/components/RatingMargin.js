@@ -8,7 +8,7 @@ const RatingMargin = (props) => {
           <span className='customerRating'>Customer rating</span>
           <div className='bigRating'>{props.rating}</div>
           <div className='mainStars'>
-            <Rating sku={props.sku} reviews={props.reviews}/>
+            <Rating sku={props.sku} reviews={props.reviews} rating={props.rating}/>
             <span className='reviewCount'>({props.length} Reviews)</span>
           </div>
           <div className='recommendPercent'>

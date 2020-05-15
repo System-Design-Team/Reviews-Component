@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "dev": "webpack -d",
+    "edit": "webpack -d -w",
     "start:server": "nodemon server/routes.js"
   },
   "author": "Sean Meyer",

@@ -11,22 +11,20 @@ export default class App extends Component {
     super();
     this.state = {
       reviews: [],
-      currentSku: 510121,
-      currentRating: 2.75
+      currentSku: 125613,
+      currentRating: 1,
+      hasClicked: false
     };
     this.getAllReviews = this.getAllReviews.bind(this);
     this.averageStars = this.averageStars.bind(this);
+    this.showContent = this.showContent.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.getAllReviews();
   }
 
-  // componentDidUpdate(prevState) {
-  //   if (this.state.currentRating !== prevState.currentRating) {
-  //     this.averageStars(this.state.reviews, this.state.currentSku)
-  //   }
-  // }
 
   // TODO: find a way to update current sku on get
   // function used to update all reviews
@@ -53,33 +51,48 @@ export default class App extends Component {
     })
     let total = skuArray.reduce((a, b) => a + b);
     let results = total / skuArray.length;
-     this.setState({ currentRating: results});
+    this.setState({ currentRating: Math.round(10*results)/10});
+  }
+
+  showContent(e) {
+    this.setState({hasClicked: !this.state.hasClicked})
+  }
+
+  handleClick() {
+    this.averageStars(this.state.reviews, this.state.currentSku);
+    this.showContent();
   }
 
   render() {
     return (
       <div className='entireRender'>
-        <button className='reviewButton' onClick={() => this.averageStars(this.state.reviews, this.state.currentSku)}>
+        <button className='reviewButton' onClick={() => this.handleClick()}>
           <span className='btnReview'><h1 >Reviews</h1>
           </span>
-            <span className='btnStars'><StarRatings
+          {!this.state.hasClicked && <span className='btnStars'><StarRatings
             starDimension='30px'
             rating={this.state.currentRating}
             starRatedColor='yellow' numberOfStars={5}
             starSpacing='0px'
             /> ({this.state.reviews.length})
-            </span>
+          </span>}
+
+          {this.state.hasClicked ? <img id="closedChevron" src="./open chevron.png"></img> : <img id="chevron"  src="./open chevron.png"></img>}
+
         </button>
-        <RatingMargin
-        reviews={this.state.reviews}
-        length={this.state.reviews.length}
-        rating={this.state.currentRating}
-        sku={this.state.currentSku}
-        />
-          <ReviewList rating={this.state.currentRating}
+        {this.state.hasClicked && <RatingMargin
+          reviews={this.state.reviews}
+          length={this.state.reviews.length}
+          rating={this.state.currentRating}
+          sku={this.state.currentSku}
+        />}
+
+        {this.state.hasClicked && <ReviewList
+          rating={this.state.currentRating}
           reviews={this.state.reviews}
           product={this.state.currentSku}
-          />
+        />}
+
       </div>
     );
   }
