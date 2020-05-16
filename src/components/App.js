@@ -4,6 +4,7 @@ import Rating from './Rating.js';
 import StarRatings from 'react-star-ratings';
 import ReviewList from './ReviewList.js';
 import RatingMargin from './RatingMargin.js';
+import Overview from './Overview.js';
 
 
 export default class App extends Component {
@@ -14,7 +15,7 @@ export default class App extends Component {
       currentSku: 125613,
       currentRating: 1,
       hasClicked: false,
-      overviewClick: false,
+      overviewClick: true,
       specClick: false
     };
     this.getAllReviews = this.getAllReviews.bind(this);
@@ -45,7 +46,7 @@ export default class App extends Component {
       }
     })
   }
-
+  // gets the average star rating based on individual star rating per reveiw
   averageStars(reviews, sku) {
     let skuArray = [];
     reviews.map((item) => {
@@ -57,19 +58,19 @@ export default class App extends Component {
     let results = total / skuArray.length;
     this.setState({ currentRating: Math.round(10*results)/10});
   }
-
+  // shows content for review section
   showContent(e) {
     this.setState({hasClicked: !this.state.hasClicked})
   }
-
+  // shows content for overview section
   showOverviewClick() {
     this.setState({overviewClick: !this.state.overviewClick})
   }
-
+  // shows conent for specifications section
   showSpecClick() {
     this.setState({specClick: !this.state.specClick})
   }
-
+  // handles click for review section to update average starts and show component
   handleClick() {
     this.averageStars(this.state.reviews, this.state.currentSku);
     this.showContent();
@@ -83,40 +84,44 @@ export default class App extends Component {
           <span className='btnReview'><h1 >Overview</h1>
           </span>
           {this.state.overviewClick ? <img id="closedChevronOver" src="https://drscdn.500px.org/photo/1015780035/m%3D900/v2?sig=94940562f1150fff4a78672b86aba75c66b32cb1743047176ecfcdf9f56103c8"></img> : <img id="chevron"  src="https://drscdn.500px.org/photo/1015780035/m%3D900/v2?sig=94940562f1150fff4a78672b86aba75c66b32cb1743047176ecfcdf9f56103c8"></img>}
-
           </button>
+          {this.state.overviewClick && <Overview />}
         </div>
+
         <div className="specDiv">
             <button className='specButton' onClick={() => this.showSpecClick()}>
             <span className='btnReview'><h1 >Specifications</h1>
             </span>
             {this.state.specClick ? <img id="closedChevronSpec" src="https://drscdn.500px.org/photo/1015780035/m%3D900/v2?sig=94940562f1150fff4a78672b86aba75c66b32cb1743047176ecfcdf9f56103c8"></img> : <img id="chevron"  src="https://drscdn.500px.org/photo/1015780035/m%3D900/v2?sig=94940562f1150fff4a78672b86aba75c66b32cb1743047176ecfcdf9f56103c8"></img>}
-
           </button>
         </div>
 
         <div className="reviewDiv">
           <button className='reviewButton' onClick={() => this.handleClick()}>
-            <span className='btnReview'><h1 >Reviews</h1>
+            <span className='btnReview'>
+              <h1 >Reviews</h1>
             </span>
+
             {!this.state.hasClicked && <span className='btnStars'><StarRatings
               starDimension='30px'
               rating={this.state.currentRating}
               starRatedColor='yellow' numberOfStars={5}
               starSpacing='0px'
               /> ({this.state.reviews.length})
-            </span>}
+            </span>
+            }
 
             {this.state.hasClicked ? <img id="closedChevron" src="https://drscdn.500px.org/photo/1015780035/m%3D900/v2?sig=94940562f1150fff4a78672b86aba75c66b32cb1743047176ecfcdf9f56103c8"></img> : <img id="chevron"  src="https://drscdn.500px.org/photo/1015780035/m%3D900/v2?sig=94940562f1150fff4a78672b86aba75c66b32cb1743047176ecfcdf9f56103c8"></img>}
-
           </button>
         </div>
+
         {this.state.hasClicked && <RatingMargin
           reviews={this.state.reviews}
           length={this.state.reviews.length}
           rating={this.state.currentRating}
           sku={this.state.currentSku}
-        />}
+        />
+      }
 
         {this.state.hasClicked && <ReviewList
           rating={this.state.currentRating}
