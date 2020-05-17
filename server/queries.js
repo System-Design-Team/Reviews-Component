@@ -19,10 +19,20 @@ const getAllreviews = (callback) => {
   })
 };
 
+const getAllProducts = (callback) => {
+  connection.query('SELECT * FROM products', (err, data) => {
+    if (err) {
+      callback(err, null)
+    } else {
+      callback(null, data)
+    }
+  })
+}
+
 // gets reviews from DB where sku matches one sent in get req
 
-const getReviewsForProduct = (sku, callback) => {
-  connection.query('SELECT * FROM reviews WHERE product_sku = (?)', [sku], (err, data) => {
+const getReviewsForProduct = (name, callback) => {
+  connection.query('SELECT * FROM products WHERE product_title = "Claymore Roomba";', (err, data) => {
     if (err) {
       callback(err, null)
     } else {
@@ -33,5 +43,6 @@ const getReviewsForProduct = (sku, callback) => {
 
 module.exports = {
   getAllreviews,
-  getReviewsForProduct
+  getReviewsForProduct,
+  getAllProducts
 }
