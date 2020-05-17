@@ -23,6 +23,28 @@ app.get('/reviews', (req, res) => {
   })
 })
 
+app.get('/allProducts', (req, res) => {
+  queries.getAllProducts((err, data) => {
+    if (err) {
+      res.status(500).send('could not get products!')
+    } else {
+      res.send(data)
+    }
+  })
+})
+
+app.get('/product', (req, res) => {
+  var name = req.query.name
+  console.log(name);
+  queries.getReviewsForProduct(name, (err, data) => {
+    if (err) {
+      res.status(500).send('could not get product!')
+    } else {
+      res.send(data)
+    }
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
 })
