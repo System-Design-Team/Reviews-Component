@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../dist')));
 
 
-
 app.get('/reviews', (req, res) => {
   queries.getAllreviews((err, data) => {
     if (err) {
