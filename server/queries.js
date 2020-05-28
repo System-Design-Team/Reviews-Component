@@ -4,11 +4,10 @@ const config = require('./serverConfig.js');
 const connection = mysql.createConnection(config);
 
 connection.connect(() => {
-  console.log('yo')
+  console.log('hello world')
 });
 
 // gets all reviews
-
 const getAllreviews = (callback) => {
   connection.query('SELECT * FROM reviews', (err, data) => {
     if (err) {
@@ -30,7 +29,6 @@ const getAllProducts = (callback) => {
 }
 
 // gets reviews from DB where sku matches one sent in get req
-
 const getReviewsForProduct = (name, callback) => {
   connection.query('SELECT * FROM products WHERE product_title = "Claymore Roomba";', (err, data) => {
     if (err) {
