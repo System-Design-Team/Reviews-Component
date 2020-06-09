@@ -31,8 +31,8 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.getAllReviews();
-    this.getAllProducts();
+    //this.getAllReviews();
+    //this.getAllProducts();
     document.addEventListener('submit', () => this.getSearchbarValue());
   }
 
